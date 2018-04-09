@@ -123,7 +123,23 @@ function Movie(){
 
 	//altered url to include user input as "movieData"
 	request("http://www.omdbapi.com/?i=tt3896198&apikey=fc1c67aa&t=" + movieData + "&y=&plot=full&tomatoes=true&r=json", function (error, response, body) {
+		if(movieData === undefined){
+				request("http://www.omdbapi.com/?i=tt3896198&apikey=fc1c67aa&t="mrnobody"&y=&plot=full&tomatoes=true&r=json", function (error, response, body) {
 
+	  		// console.log(response); // Print the data
+	  		console.log("Title: ".magenta + JSON.parse(body).Title);
+	  		console.log("Release Date: ".magenta + JSON.parse(body).Released);
+	  		console.log("IMDB Rating: ".magenta + JSON.parse(body).imdbRating);
+	  		console.log("Country: ".magenta + JSON.parse(body).Country);
+	  		console.log("Language: ".magenta + JSON.parse(body).Language);
+	  		console.log("Plot: ".magenta + JSON.parse(body).Plot);
+	  		console.log("Actors: ".magenta + JSON.parse(body).Actors);
+	  		console.log("Rotten Tomatoes Rating: ".magenta + JSON.parse(body).Ratings[1].Value);
+	  		console.log("Rotten Tomatoes URL: ".magenta + JSON.parse(body).tomatoURL);
+	  		console.log("\n");
+
+});
+		}
 	  		// console.log(response); // Print the data
 	  		console.log("Title: ".magenta + JSON.parse(body).Title);
 	  		console.log("Release Date: ".magenta + JSON.parse(body).Released);
