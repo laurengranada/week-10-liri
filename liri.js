@@ -3,37 +3,30 @@ var colors = require('colors');
 
 // variables for platforms
 var fs = require('fs');
-
 var Twitter = require('twitter');
-
 var Spotify = require('node-spotify-api');
-
+var request = require('request');
 
 // this below no longer works --> spotify now requires a token
 // var spotify = require('spotify');
 
-var request = require('request');
-
 // adding the var to pull keys
 var keys = require('./keys.js');
-
 var twitKey = keys.twitKey;
-
 var spotKey = keys.spotKey;
 
 //arguments
 var argument = process.argv[2];
 var value = process.argv[3];
 
-
-//parameters
+//parameters for twitter command
 var params = {
 	screen_name: "LaurenGranada",
 	count: 20
 };
 
 
-//switch case
+//switch cases for all commands
 switch (argument) {
     case "my-tweets":
         myTweets();
@@ -52,8 +45,7 @@ switch (argument) {
         break;
 };
 
-
-
+// command for twitter
 function myTweets() {
 
 	var tweet = new Twitter(twitKey);
@@ -70,20 +62,35 @@ function myTweets() {
   });
 };
 
+// command for spotify
 function mySpotify(){
 
-var song = process.argv[3];
+	var song = process.argv[3];
 
-var spotify = new Spotify(spotKey);
- 
-spotify.search({ type: 'track', query: song }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
- 
-console.log(data.tracks.items[0]); 
-});
+	var spotify = new Spotify(spotKey);
+
+	var getArtists = function(artist){
+		return artist.name;
+	} 
+	spotify.search({ type: 'track', query: song }, function(err, data) {
+	  if (err) {
+	    return console.log('Error occurred: ' + err);
+	  }
+	 //save data for easier callback
+	 var songData = data.tracks.items;
+
+	 for (var i = 0; i < songData.length; i++){
+	 	console.log(colors.underline("Result #".underline + i));
+	 	console.log("Artist(s): ".green + songData[i].artists.map(getArtists));
+	 	console.log("Song title: ".green + songData[i].name);
+	 	console.log("Album title: ".green + songData[i].album.name);
+	 	console.log("Preview song here:".green + " https://open.spotify.com/track/" + songData[i].id);
+	 	console.log("");
+	 }
+	});
 };
+
+// the below no longer works because spotify now requires a token /////////////////////
 
 // function mySpotify(){
 
@@ -108,44 +115,34 @@ console.log(data.tracks.items[0]);
 
 // };
 
-function Movie(){
+/////////////////////////////////////////////////////////////////////////////
 
+// command for OMDB
+function Movie(){
 	var movieData = process.argv[3];
 
-	request("http://www.omdbapi.com/?t=" + movieData + "&y=&plot=full&tomatoes=true&r=json",function(error, response, body){
-		if (error && response.statusCode === 200){
-			request("http://www.omdbapi.com/?t=mr+nobody+&y=&plot=full&tomatoes=true&r=json");
-		} else {
-			//movie name
-			console.log("Movie: ".yellow + movieData);
-			//release date
-			console.log("Release Date: " + JSON.parse(body).Year);
-			// Rating
-			console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-			// Plot
-			console.log("Plot: " + JSON.parse(body).Plot);
-			// Actors
-			console.log("Actors: " + JSON.parse(body).Actors);
-			// Rotten tomatoes
-			console.log("Rotten Tomatoes Rating: " + JSON.parse(body).tomatoes);
-		};
-	});
+	//altered url to include user input as "movieData"
+	request("http://www.omdbapi.com/?i=tt3896198&apikey=fc1c67aa&t=" + movieData + "&y=&plot=full&tomatoes=true&r=json", function (error, response, body) {
+
+	  		// console.log(response); // Print the data
+	  		console.log("Title: ".magenta + JSON.parse(body).Title);
+	  		console.log("Release Date: ".magenta + JSON.parse(body).Released);
+	  		console.log("IMDB Rating: ".magenta + JSON.parse(body).imdbRating);
+	  		console.log("Country: ".magenta + JSON.parse(body).Country);
+	  		console.log("Language: ".magenta + JSON.parse(body).Language);
+	  		console.log("Plot: ".magenta + JSON.parse(body).Plot);
+	  		console.log("Actors: ".magenta + JSON.parse(body).Actors);
+	  		console.log("Rotten Tomatoes Rating: ".magenta + JSON.parse(body).Ratings[1].Value);
+	  		console.log("Rotten Tomatoes URL: ".magenta + JSON.parse(body).tomatoURL);
+	  		console.log("\n");
+
+});
 };
 
-function doCommand(){
 
+
+function doCommand(){
 	fs.readFile('random.txt', "utf8", function(error, data){
 		console.log(data);
 	})
 };
-
-// 	}
-// };
-
-// if(argument === "movie-this"){
-// request("http://www.omdbapi.com/?t= + movie + &y=&plot=short&r=json",function(error, response, body){
-// 	if(!error && response.statusCode === 200){
-// 		console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
-// 	}
-// })
-// };
