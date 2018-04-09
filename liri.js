@@ -79,8 +79,7 @@ function mySpotify(){
 	 //save data for easier callback
 	 var songData = data.tracks.items;
 
-	 // used for loop with "i=1" only for the sole purpose of console.logging the results list to start at number 1 :)
-	 for (var i = 1; i < songData.length; i++){
+	 for (var i = 0; i < songData.length; i++){
 	 	console.log(colors.underline("Result #".underline + i));
 	 	console.log("Artist(s): ".green + songData[i].artists.map(getArtists));
 	 	console.log("Song title: ".green + songData[i].name);
