@@ -7,9 +7,9 @@ Download files, and open in your terminal/bash window.
 
 ### Overview
 LIRI is a command line node app that takes in parameters and gives you back data. Liri.js can take in one of the following commands:
-    - `my-tweets`
-    - `spotify-this-song`
-    - `movie-this`
+    - `my-tweets
+       spotify-this-song
+       movie-this`
 
 ![alt text](https://github.com/laurengranada/week-10-liri/blob/master/read-images/node_liri.png)
 
@@ -20,7 +20,7 @@ LIRI is a command line node app that takes in parameters and gives you back data
 ![alt text](https://github.com/laurengranada/week-10-liri/blob/master/read-images/my-tweets.png)
 
 2. `node liri.js spotify-this-song '<song name here>'`
-    - This will 20 results with the following from Spotify:
+    - This will show 20 results with the following from Spotify:
         - Artist(s)
         - Song Title
         - Album Title
@@ -47,7 +47,7 @@ LIRI is a command line node app that takes in parameters and gives you back data
 - fs npm
 - twitter npm
 - node-spotify-api npm 
-    * * * previously used Spotify npm - that did not require a token to retrieve Spotify data * * *
+    * previously used Spotify npm - that did not require a token to retrieve Spotify data * * *
 - request npm
 - colors npm - for stylizing the command line
 - OMDB api (http://www.omdbapi.com/)
