@@ -7,11 +7,11 @@ Download files, and open in your terminal/bash window.
 
 ### Overview
 LIRI is a command line node app that takes in parameters and gives you back data. Liri.js can take in one of the following commands:
-    - ```javascript
-        my-tweets
-        spotify-this-song
-        movie-this`
-        ```
+```javascript
+my-tweets
+spotify-this-song
+movie-this`
+```
 
 ![alt text](https://github.com/laurengranada/week-10-liri/blob/master/read-images/node_liri.png)
 
