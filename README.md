@@ -19,7 +19,7 @@ movie-this
 1. `node liri.js my-tweets`
     - This will show my last 20 tweets and when they were created at in your terminal/bash window.
 
-![alt text](https://github.com/laurengranada/week-10-liri/blob/master/read-images/my-tweets.png)
+![alt text](https://github.com/laurengranada/week-10-liri/blob/master/read-images/newtweets.png)
 
 2. `node liri.js spotify-this-song '<song name here>'`
     - This will show 20 results with the following from Spotify:
