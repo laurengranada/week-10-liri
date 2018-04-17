@@ -79,8 +79,8 @@ function mySpotify(){
 	 //save data for easier callback
 	 var songData = data.tracks.items;
 
-	 for (var i = 0; i < songData.length; i++){
-	 	console.log(colors.underline("Result #".underline + i));
+	 for (var i = 0; i <= songData.length - 1; i++){
+	 	console.log(colors.underline("Result #".underline + (i + 1)));
 	 	console.log("Artist(s): ".green + songData[i].artists.map(getArtists));
 	 	console.log("Song title: ".green + songData[i].name);
 	 	console.log("Album title: ".green + songData[i].album.name);
